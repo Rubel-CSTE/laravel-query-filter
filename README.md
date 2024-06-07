@@ -29,7 +29,18 @@ class User extends Model
 ```
 
 ### Step 2: Create Filter Classes
-Create filter classes in the App\Filters namespace for each model:
+
+To generate a new filter class, use the make:filter Artisan command followed by the name of the class you want to create. For example, to create a filter class for the User model, run:
+
+```sh
+php artisan make:filter YourModel Name
+```
+Example:
+```sh
+php artisan make:filter User
+```
+OR
+Create filter classes in the App\Filters namespace for each model manually:
 
 Example UserFilter Class
 

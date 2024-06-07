@@ -8,7 +8,9 @@ class QueryFilterServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        // Register services if needed
+        $this->commands([
+            Console\FilterCommand::class,
+        ]);
     }
 
     public function boot()

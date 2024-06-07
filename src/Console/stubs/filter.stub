@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Filters;
+
+use Sufian\QueryFilter\BaseFilter;
+use Illuminate\Database\Eloquent\Builder;
+
+class {{className}}Filter extends BaseFilter
+{
+    /**
+     * Define the fields by which the {{className}} can be filtered.
+     * Example: protected $filters = ['name', 'email'];
+     *
+     * @var array
+     */
+    protected $filters = [];
+
+    /**
+    * Filter the query by filters property method name.
+    *
+    * @param  \Illuminate\Database\Eloquent\Builder  $query
+    * @param  mixed  $value
+    * @return \Illuminate\Database\Eloquent\Builder
+    * Example: public function filterName(Builder $query, $value){}
+    */
+}
