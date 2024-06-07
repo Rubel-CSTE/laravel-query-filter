@@ -1,0 +1,28 @@
+{
+    "name": "sufian/laravel-query-filter",
+    "description": "A Laravel package to filter queries based on model properties.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Sufian\\QueryFilter\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rubel-CSTE",
+            "email": "rubel.nstu27@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sufian\\QueryFilter\\QueryFilterServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.4"
+    }
+}
