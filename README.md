@@ -14,46 +14,72 @@ composer require sufian/laravel-query-filter
 
 ## Usage
 
-Once installed, you can use the QueryFilter trait in your Eloquent model:
-
+### Step 1: Use the Filterable Trait
+Add the Filterable trait to the Eloquent models you want to filter:
 ```php
-use Sufian\LaravelQueryFilter\QueryFilter;
+namespace App\Models;
 
-class YourModel extends Model
+use Illuminate\Database\Eloquent\Model;
+use Sufian\QueryFilter\Filterable;
+
+class User extends Model
 {
-    use QueryFilter;
+    use Filterable;
 }
 ```
 
-Then, you can apply filters to your queries:
+### Step 2: Create Filter Classes
+Create filter classes in the App\Filters namespace for each model:
+
+Example UserFilter Class
 
 ```php
-$filteredResults = YourModel::filter($request->all())->get();
-```
-### Available Filters
-You can define filters by creating methods in your model class following the naming convention filter{PropertyName}:
+namespace App\Filters;
 
-```php
-class YourModel extends Model
+use Sufian\QueryFilter\BaseFilter;
+use Illuminate\Database\Eloquent\Builder;
+
+class UserFilter extends BaseFilter
 {
-    use QueryFilter;
-    
-    public function filterName($query, $value)
+    protected $filters = ['name', 'email'];
+
+    public function name(Builder $query, $value)
     {
-        return $query->where('name', $value);
+        $query->where('name', 'like', '%' . $value . '%');
+    }
+
+    public function email(Builder $query, $value)
+    {
+        $query->where('email', 'like', '%' . $value . '%');
     }
 }
 ```
-You can then apply the filter in your controller:
+### Step 3: Use the Filter in Controllers
+You can now use the filter method in your controllers:
 
+UserController
 ```php
-$filteredResults = YourModel::filter($request->all())->get();
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class UserController extends Controller
+{
+    public function index(Request $request)
+    {
+        $users = User::filter()->get();
+        return response()->json($users);
+    }
+}
 ```
 ## Contributing
-Thank you for considering contributing to this project! Please check the contributing guidelines for details.
+
+Thank you for considering contributing to the Laravel Query Filter package! Please read the [contribution guidelines]() for details on how to contribute.
 
 ## Security Vulnerabilities
-If you discover a security vulnerability within this package, please send an e-mail to sufian at [rubel.nstu27@gmail.com](mailto:rubel.nstu27@gmail.com). All security vulnerabilities will be promptly addressed.
+
+If you discover a security vulnerability within this Laravel Query Filter package, please send an e-mail to sufian at [rubel.nstu27@gmail.com](mailto:rubel.nstu27@gmail.com). All security vulnerabilities will be promptly addressed.
 
 ## License
 This package is open-sourced software licensed under the MIT license.
